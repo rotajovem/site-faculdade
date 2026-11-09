@@ -16,54 +16,405 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Documento da Faculdade</title>
+    <title>Rota Jovem</title>
 
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        :root {
+            color-scheme: light;
+            --ink: #17352f;
+            --green: #176b55;
+            --muted: #64736e;
+            --sage: #eaf2e9;
+            --paper: #f7f8f5;
+            --line: #e3e9e3;
         }
 
-        .container {
-            background: white;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            text-align: center;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0 28px 56px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .site-header,
+        main {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        .site-header {
+            min-height: 83px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .marca {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            color: var(--ink);
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .marca-simbolo {
+            display: grid;
+            width: 36px;
+            height: 36px;
+            place-items: center;
+            border-radius: 12px;
+            background: #125242;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .mensagem-header {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .hero {
+            position: relative;
+            display: flex;
+            min-height: 438px;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 34px;
+            padding: 48px 66px;
+            border-radius: 24px;
+            background: var(--sage);
+        }
+
+        .hero-conteudo {
+            position: relative;
+            z-index: 1;
+            max-width: 590px;
+        }
+
+        .sobretitulo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 16px;
+            color: #12634f;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.7px;
+            text-transform: uppercase;
+        }
+
+        .ponto {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #e9a23b;
         }
 
         h1 {
-            margin-bottom: 15px;
+            max-width: 570px;
+            margin: 0;
+            color: var(--ink);
+            font-size: clamp(42px, 5vw, 58px);
+            letter-spacing: -2.6px;
+            line-height: 1.04;
         }
 
-        p {
-            color: #666;
+        h1 span {
+            color: var(--green);
+        }
+
+        .descricao-hero {
+            max-width: 510px;
+            margin: 18px 0 0;
+            color: #586d67;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .arte {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 42%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .sol {
+            position: absolute;
+            top: 48px;
+            right: 92px;
+            width: 162px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #f5d99e;
+        }
+
+        .anel {
+            position: absolute;
+            right: 6px;
+            bottom: -180px;
+            width: 340px;
+            aspect-ratio: 1;
+            border: 20px solid #c6ded2;
+            border-radius: 50%;
+        }
+
+        .cartao-destaque {
+            position: absolute;
+            top: 140px;
+            right: 65px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 19px;
+            transform: rotate(-5deg);
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 12px 30px rgba(23, 53, 47, 0.08);
+        }
+
+        .seta {
+            display: grid;
+            width: 36px;
+            height: 36px;
+            place-items: center;
+            border-radius: 10px;
+            background: #e9f2ec;
+            color: var(--green);
+            font-size: 19px;
+        }
+
+        .cartao-destaque span:last-child {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .cartao-destaque strong {
+            display: block;
+            color: var(--ink);
+            font-size: 13px;
+        }
+
+        .documentos {
+            margin-top: 24px;
+            padding: 30px;
+            border: 1px solid #edf0eb;
+            border-radius: 22px;
+            background: #fff;
+            box-shadow: 0 8px 28px rgba(23, 53, 47, 0.035);
+        }
+
+        .documentos-cabecalho {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .documentos-cabecalho h2 {
+            margin: 0;
+            color: var(--ink);
+            font-size: 22px;
+            letter-spacing: -0.5px;
+        }
+
+        .documentos-cabecalho p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .documentos-grade {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .documento {
+            display: flex;
+            min-height: 176px;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: #fff;
+        }
+
+        .icone-documento {
+            display: grid;
+            width: 40px;
+            height: 40px;
+            place-items: center;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            background: #edf4ee;
+            color: var(--green);
+            font-size: 20px;
+        }
+
+        .documento h3 {
+            margin: 0;
+            color: var(--ink);
+            font-size: 16px;
+        }
+
+        .documento p {
+            flex: 1;
+            margin: 7px 0 16px;
+            color: var(--muted);
+            font-size: 13px;
             line-height: 1.5;
         }
 
         .botao {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 25px;
-
-            background: #111;
-            color: white;
-
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
         }
 
         .botao:hover {
-            opacity: 0.8;
+            color: #104c3d;
+        }
+
+        .botao:focus-visible,
+        .marca:focus-visible {
+            border-radius: 4px;
+            outline: 3px solid #e6aa49;
+            outline-offset: 4px;
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 0 20px 36px;
+            }
+
+            .hero {
+                min-height: 400px;
+                padding: 42px 38px;
+            }
+
+            .hero-conteudo {
+                max-width: 80%;
+            }
+
+            .arte {
+                width: 36%;
+                opacity: 0.7;
+            }
+
+            .sol {
+                right: -25px;
+            }
+
+            .cartao-destaque {
+                right: -30px;
+            }
+
+            .documentos {
+                padding: 24px;
+            }
+
+            .documentos-grade {
+                grid-template-columns: 1fr;
+            }
+
+            .documento {
+                min-height: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0 15px 28px;
+            }
+
+            .site-header {
+                min-height: 70px;
+            }
+
+            .mensagem-header {
+                max-width: 155px;
+                text-align: right;
+                font-size: 11px;
+            }
+
+            .hero {
+                min-height: 390px;
+                margin-top: 20px;
+                padding: 34px 25px;
+                border-radius: 20px;
+            }
+
+            .hero-conteudo {
+                max-width: 100%;
+            }
+
+            h1 {
+                max-width: 360px;
+                font-size: clamp(39px, 11vw, 48px);
+                letter-spacing: -1.8px;
+            }
+
+            .descricao-hero {
+                max-width: 320px;
+                font-size: 14px;
+            }
+
+            .arte {
+                right: -15px;
+                bottom: -55px;
+                top: auto;
+                width: 40%;
+                height: 160px;
+                opacity: 0.45;
+            }
+
+            .sol {
+                top: 0;
+                right: 0;
+                width: 105px;
+            }
+
+            .cartao-destaque {
+                top: 45px;
+                right: -34px;
+                padding: 10px 12px;
+            }
+
+            .anel {
+                display: none;
+            }
+
+            .documentos {
+                margin-top: 16px;
+                padding: 22px 17px;
+                border-radius: 18px;
+            }
+
+            .documentos-cabecalho h2 {
+                font-size: 19px;
+            }
         }
     </style>
 
@@ -71,25 +422,92 @@
 
 <body>
 
-    <div class="container">
-
-        <h1>📚 Documento da Faculdade</h1>
-
-        <p>
-            Acesse abaixo o documento referente ao nosso projeto.
-        </p>
-
-        <a href="documento.pdf"
-           target="_blank"
-           class="botao"
-           onclick="gtag('event', 'acesso_documento', {
-               'event_category': 'Documento',
-               'event_label': 'Documento da Faculdade'
-           });">
-            📄 Acessar documento
+    <header class="site-header">
+        <a class="marca" href="#" aria-label="Rota Jovem - início">
+            <span class="marca-simbolo" aria-hidden="true">RJ</span>
+            <span>rotajovem</span>
         </a>
+        <p class="mensagem-header">Seu futuro profissional começa com um passo.</p>
+    </header>
 
-    </div>
+    <main>
+        <section class="hero" aria-labelledby="titulo-principal">
+            <div class="hero-conteudo">
+                <p class="sobretitulo"><span class="ponto" aria-hidden="true"></span>Seu caminho, suas conquistas</p>
+                <h1 id="titulo-principal">Toda trajetória tem um <span>começo.</span></h1>
+                <p class="descricao-hero">
+                    Explore os materiais da Rota Jovem e dê o próximo passo na sua jornada profissional.
+                    Escolha um documento para acessar.
+                </p>
+            </div>
+            <div class="arte" aria-hidden="true">
+                <span class="sol"></span>
+                <span class="anel"></span>
+                <div class="cartao-destaque">
+                    <span class="seta">↗</span>
+                    <span>novos caminhos<strong>começam aqui</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="documentos" aria-labelledby="titulo-documentos">
+            <div class="documentos-cabecalho">
+                <div>
+                    <h2 id="titulo-documentos">Seus documentos</h2>
+                    <p>Selecione um material para abrir.</p>
+                </div>
+            </div>
+            <div class="documentos-grade">
+                <article class="documento">
+                    <span class="icone-documento" aria-hidden="true">↗</span>
+                    <h3>Guia para conquistar o primeiro emprego</h3>
+                    <a href="Vermelho%20e%20Amarelo%20Limpo%20e%20Simples%20Age%CC%82ncia%20Profissional%20Folha%20de%20Rosto%203.pdf"
+                       target="_blank"
+                       rel="noopener"
+                       class="botao"
+                       onclick="gtag('event', 'acesso_documento', { 'event_category': 'Documento', 'event_label': 'Documento 1' });">
+                        Acessar documento <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <article class="documento">
+                    <span class="icone-documento" aria-hidden="true">↗</span>
+                    <h3>Itens essenciais para a elaboração de um bom currículo</h3>
+                    <a href="Vermelho%20e%20Amarelo%20Limpo%20e%20Simples%20Age%CC%82ncia%20Profissional%20Folha%20de%20Rosto.pdf"
+                       target="_blank"
+                       rel="noopener"
+                       class="botao"
+                       onclick="gtag('event', 'acesso_documento', { 'event_category': 'Documento', 'event_label': 'Documento 2' });">
+                        Acessar documento <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <article class="documento">
+                    <span class="icone-documento" aria-hidden="true">↗</span>
+                    <h3>Áreas de expansão e tendências do mercado de trabalho</h3>
+                    <a href="Vermelho%20e%20Amarelo%20Limpo%20e%20Simples%20Age%CC%82ncia%20Profissional%20Folha%20de%20Rosto%202.pdf"
+                       target="_blank"
+                       rel="noopener"
+                       class="botao"
+                       onclick="gtag('event', 'acesso_documento', { 'event_category': 'Documento', 'event_label': 'Documento 3' });">
+                        Acessar documento <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+
+                <article class="documento">
+                    <span class="icone-documento" aria-hidden="true">↗</span>
+                    <h3>Onde encontrar cursos gratuitos</h3>
+                    <a href="Vermelho%20e%20Amarelo%20Limpo%20e%20Simples%20Age%CC%82ncia%20Profissional%20Folha%20de%20Rosto%204.pdf"
+                       target="_blank"
+                       rel="noopener"
+                       class="botao"
+                       onclick="gtag('event', 'acesso_documento', { 'event_category': 'Documento', 'event_label': 'Documento 4' });">
+                        Acessar documento <span aria-hidden="true">→</span>
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
 
 </body>
 
